@@ -12,11 +12,11 @@ basic surrogate modelling
 global candidate sampling using Sobol sequences or uniform random sampling
 This simplicity ensured that early failures or unexpected results could be traced back to specific assumptions rather than hidden implementation details.
 3. Key Learnings
-- Effective optimisation is driven by structure, not randomness
-- Exploration is essential early, but costly late
-- Identifying dominant directions of variation dramatically improves efficiency
-- Bayesian optimisation and reinforcement learning share deep conceptual similarities
-Mid rounds: acquisition parameters were tuned deliberately, and candidate sampling became more focused around promising regions.
+  Effective optimisation is driven by structure, not randomness
+  Exploration is essential early, but costly late
+  Identifying dominant directions of variation dramatically improves efficiency
+  Bayesian optimisation and reinforcement learning share deep conceptual similarities
+
 4.Technical Highlights
 Surrogate-based optimisation:
 Implemented Gaussian Process (GP) surrogates to model unknown objective functions and guide query selection under a strict evaluation budget.
