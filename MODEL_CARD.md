@@ -1,137 +1,87 @@
-1. Overview
+ Overview
 
-Model name
-Bayesian Optimisation with Adaptive Exploration (BO-AE)
+Model Name: Iterative Bayesian Optimisation with PCA-Guided Refinement
+Model Type: Surrogate-based optimisation (Gaussian Process + acquisition strategy)
+Version: Final capstone submission
 
-Type
-Surrogate-based black-box optimisation
+This approach combines Bayesian optimisation principles with dimensionality-aware refinement and reinforcement learning-inspired exploration control.
 
-Version
-v1.0 (Ten-round iterative strategy)
+Intended Use and Scope
 
-2. Intended Use
+Intended use:
 
-Appropriate use cases
+sequential optimisation with limited evaluation budgets
 
-Optimising expensive, unknown objective functions
+black-box functions with moderate smoothness
 
-Low-sample, high-uncertainty optimisation problems
+engineering or ML hyperparameter tuning tasks
 
-Educational demonstrations of Bayesian optimisation
+Not recommended for:
 
-Inappropriate use cases
+highly discontinuous or adversarial functions
 
-High-frequency real-time optimisation
+problems requiring strict global guarantees
 
-Deterministic or convex problems
+settings with extremely noisy or deceptive feedback
 
-Safety-critical decision-making without human oversight
+Performance Summary
 
-3. Strategy Details (Across Ten Rounds)
+Performance improved rapidly in early rounds and stabilised in later iterations, reflecting diminishing returns as uncertainty decreased. Rather than chasing large late-stage gains, the strategy prioritised stability and consistency.
 
-Rounds 1–3
+Metrics were evaluated per function using:
 
-Broad exploration
+best-observed value
 
-Heuristic reasoning
+convergence behaviour
 
-Initial coverage of search space
+sensitivity to exploratory steps
 
-Rounds 4–6
+The final iterations showed controlled refinement rather than large jumps, consistent with a converged surrogate model.
 
-Introduction of surrogate models
+Assumptions, Trade-offs and Limitations
 
-Balance between exploration and exploitation
+Key assumptions:
 
-Early signs of nonlinearity and noise
+functions exhibit some smoothness or local structure
 
-Rounds 7–9
+dominant directions of variation exist
 
-Explicit Bayesian optimisation
+surrogate uncertainty is informative
 
-Gaussian Process surrogates per function
+Trade-offs:
 
-Function-specific exploration parameters
+exploration vs exploitation
 
-Recognition of scaling-law effects and emergent behaviour
+simplicity vs sophistication
 
-Round 10
+local refinement vs global search
 
-Fully BO-driven strategy
+Limitations:
 
-Expected Improvement acquisition
+PCA-style reasoning may miss non-linear interactions
 
-Trust-region awareness
+manual tuning still played a role
 
-Differentiated strategies per function based on observed behaviour
+surrogate quality depends heavily on early sampling decisions
 
-4. Performance Summary
+Reinforcement Learning Perspective 
 
-Metrics used
+The optimisation process closely mirrors reinforcement learning dynamics:
 
-Best-so-far output per function
+early high exploration resembles high-ε bandit policies
 
-Improvement per iteration
+later exploitation reflects stabilised Q-values
 
-Stability vs volatility trends
+feedback gradually reduces update magnitude
 
-Observed outcomes
+ε-greedy refinement enables risk-aware final decisions
 
-Some functions show power-law convergence and saturation
+The final strategy represents a hybrid of model-free learning (trial and error) and model-based planning (surrogate-guided anticipation).
 
-Others exhibit multimodal or emergent behaviour
+Ethical and Reproducibility Considerations
 
-Higher-dimensional functions require sustained exploration
+Transparency was a guiding principle throughout the project. All design decisions, assumptions and refinements are documented in the repository to support reproducibility. While this project does not involve human data, the emphasis on explainable decision-making and uncertainty awareness is directly relevant to real-world ML systems where accountability matters.
 
-Performance gains diminish over time, consistent with scaling laws
+Key Lessons and Future Application
 
-5. Assumptions and Limitations
-
-Key assumptions
-
-Objective functions are reasonably smooth and stationary
-
-Gaussian Process kernels can approximate local behaviour
-
-Noise is moderate and not adversarial
-
-Limitations
-
-Sample inefficiency in high dimensions
-
-Sensitivity to kernel and acquisition choices
-
-Risk of premature convergence or boundary bias
-
-Computational cost grows with dataset size
-
-6. Ethical and Transparency Considerations
-
-Transparency
-
-Full documentation of strategy evolution
-
-Reproducible code and fixed random seeds
-
-Explicit discussion of assumptions and failures
-
-Why this matters
-
-Enables peer review and replication
-
-Prevents overclaiming optimisation success
-
-Encourages responsible application of black-box methods
-
-7. Reflection on Model Card Sufficiency
-
-This model card prioritises clarity over exhaustiveness.
-While additional quantitative benchmarks could be added, the current structure sufficiently communicates:
-
-How decisions are made
-
-Why certain strategies were chosen
-
-Where the approach may fail
-
-This level of detail aligns with real-world ML practice, where interpretability and context often matter more than raw performance metrics.
+The most important lesson from the BBO capstone project is that effective optimisation is driven by structure, not randomness. As data accumulates, strategy should evolve toward identifying and exploiting informative directions while retaining enough exploration to remain robust.
